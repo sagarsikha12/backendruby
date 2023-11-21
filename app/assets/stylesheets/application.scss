@@ -1,0 +1,102 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+
+
+
+@import "bootstrap";
+
+body{
+    background-color: #f2f2f2;
+  }
+ 
+  .brand-text-primary{
+     color: #BE263B;
+  }
+ 
+  .brand-bg-primary{
+     background-color: #BE263B;
+  }
+ 
+  .form-control:focus{
+     border-color: rgb(190, 38, 59);
+     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgb(190, 38, 58);
+     outline: 0 none;
+  }
+ 
+  .info a{
+     color: green;
+  }
+  
+  .btn-theme{
+     background-color: #BE263B;
+     color: white;
+  }
+ 
+  .btn-theme:hover{
+     background-color: #9e1224;
+     color: white;
+  }
+ 
+  .sidebar{
+    height: 90vh;
+  }
+ 
+  .pagy-nav span{
+    padding: 10px;
+  }
+ 
+  .pagy-nav .page a{
+    color: black;
+    text-decoration: none;
+  }
+ 
+  .pagy-nav .active{
+    color: #BE263B;
+  }
+
+  body {
+    background-color: #f0f5e0;
+}
+
+.navbar {
+    background-color: #8F9779;
+}
+
+.jumbotron {
+    background-color: #b2dab2;
+}
+
+.card {
+    background-color: #d9ecd0;
+}
+
+.footer {
+    background-color: #8F9779;
+    color: white;
+}
+
+.rich_text{
+   height: 200px;
+   width: 500px;
+}
+
+.scrollable-content {
+   max-height: 500px; /* Adjust this value as per your requirement */
+   overflow-y: auto;
+ }
+ 

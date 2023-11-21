@@ -1,0 +1,147 @@
+<%= csrf_meta_tags %>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Campaign Unifier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <style>
+        .dropdown-menu {
+    z-index: 1000; /* Adjust the value as needed */
+}
+
+        </style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-DARK">
+    <div class="container">
+        <a class="navbar-brand" href="#">Campaign Unifier</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Move the following ul to the right by adding "ml-auto" class -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/campaigns">Home</a>
+            </li>
+            <% if user_signed_in? %>
+                <%= link_to 'My Campaigns', my_campaigns_campaigns_path, class: 'nav-link' %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/campaigns/new">Add New Campaign</a>
+                </li>
+            <% end %>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact Admin</a>
+            </li>
+        </ul>
+
+        <!-- Notification dropdown -->
+        <div class="notification-area">
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="notification-dropdown" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" onclick="fetchNotifications()">
+                    <i class="fa fa-bell"></i>
+                    <% if unread_notifications_count > 0 %>
+                        <span class="badge badge-danger" id="unread-notifications-count"><%= unread_notifications_count %></span>
+                    <% end %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="notification-dropdown" id="notifications-dropdown">
+                    <!-- Notifications will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- User authentication links -->
+        <div class="ml-auto">
+            <% if user_signed_in? %>
+                <p class="navbar-text">
+                    Welcome, <%= current_user.first_name %>
+                </p>
+                <%= link_to destroy_user_session_path, class: "nav-link btn btn-success btn-lg text-white", data: { "turbo-method": :delete } do %>
+                    Log Out
+                <% end %>
+            <% else %>
+                <%= link_to new_user_session_path, class: "nav-link btn btn-success btn-lg text-white" do %>
+                    Sign In
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</nav>
+
+<!-- Include Bootstrap and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<!-- Your custom JavaScript -->
+<script>
+    // Function to fetch and display notifications
+  // Function to fetch and display notifications
+function fetchNotifications() {
+    $.ajax({
+        url: '/notifications',
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            const notificationsDropdown = $('#notifications-dropdown');
+            notificationsDropdown.empty();
+
+            if (data.length === 0) {
+                notificationsDropdown.append('<p>No new notifications</p>');
+            } else {
+                data.forEach((notification) => {
+                    notificationsDropdown.append(
+                        `<a href="/campaigns/${notification.campaign_id}" class="dropdown-item" onclick="markNotificationAsRead(${notification.id})">Campaign ${notification.campaign_id}</a>`
+                    );
+                });
+            }
+        },
+    });
+}
+
+
+   // Function to mark a notification as read
+function markNotificationAsRead(notificationId) {
+    $.ajax({
+        url: `/notifications/${notificationId}`,
+        method: 'PUT',
+        dataType: 'json',
+        headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+        success: function () {
+            // Update the notification count
+            const badge = $('#unread-notifications-count');
+            const currentCount = parseInt(badge.text());
+            if (currentCount > 1) {
+                badge.text(currentCount - 1);
+            } else {
+                badge.remove(); // Remove badge when count is zero
+            }
+
+            // Optionally, you can also remove the clicked notification from the dropdown
+             $(`#notification-${notificationId}`).remove();
+        },
+    });
+}
+
+
+    // Fetch notifications when the page loads
+    $(document).ready(function () {
+        fetchNotifications();
+    });
+</script>
+</body>
+</html>

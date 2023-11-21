@@ -1,0 +1,17 @@
+<div class="container">
+  <h1><%= @campaign.title %></h1>
+
+  <% if @campaign.cover_image.attached? %>
+    <%= image_tag @campaign.cover_image, alt: "Campaign Cover Image", class: "img-fluid mb-3" %>
+  <% else %>
+    <p class="text-muted">No images available for this campaign.</p>
+  <% end %>
+
+  <p><strong>Category:</strong> <%= @campaign.category.name %></p>
+
+<div class="campaign-content">
+  <%= @campaign.content.body.to_s.html_safe %>
+</div>
+
+  <%= link_to 'Back to Campaigns', campaigns_path, class: "btn btn-primary mt-3" %>
+</div>
