@@ -1,10 +1,10 @@
 {
   "actioncable.js": "/packs/js/actioncable-5d0fa671eb7c487c3a58.chunk.js",
-  "application.js": "/packs/js/application-ec6e95f81ecb7d7d696c.js",
+  "application.js": "/packs/js/application-677753d174ad9c9f505b.js",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-ec6e95f81ecb7d7d696c.js"
+        "/packs/js/application-677753d174ad9c9f505b.js"
       ]
     },
     "hello_react": {
