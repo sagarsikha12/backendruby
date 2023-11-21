@@ -1,5 +1,5 @@
 require_relative "boot"
-
+require 'sqlite3'
 require "rails/all"
 require "redis"
 # Require the gems listed in Gemfile, including any gems
