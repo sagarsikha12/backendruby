@@ -1,17 +1,17 @@
 {
-  "actioncable.js": "/packs/js/actioncable-5d0fa671eb7c487c3a58.chunk.js",
-  "application.js": "/packs/js/application-677753d174ad9c9f505b.js",
+  "actioncable.js": "/packs/js/actioncable-f6548d1c53fcf3c4b743.chunk.js",
+  "application.js": "/packs/js/application-dfe37178c5b39009de30.js",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-677753d174ad9c9f505b.js"
+        "/packs/js/application-dfe37178c5b39009de30.js"
       ]
     },
     "hello_react": {
       "js": [
-        "/packs/js/hello_react-540662b44845915eab52.js"
+        "/packs/js/hello_react-e63089359b5c0d3f601f.js"
       ]
     }
   },
-  "hello_react.js": "/packs/js/hello_react-540662b44845915eab52.js"
+  "hello_react.js": "/packs/js/hello_react-e63089359b5c0d3f601f.js"
 }
