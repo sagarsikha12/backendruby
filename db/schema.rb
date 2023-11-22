@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_15_032939) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_22_011240) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -52,11 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_032939) do
   create_table "campaigns", force: :cascade do |t|
     t.string "title"
     t.string "cover_image"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id", null: false
+    t.bigint "category_id", null: false
     t.integer "approved", default: 0
+    t.boolean "reviewed", default: false
     t.index ["category_id"], name: "index_campaigns_on_category_id"
     t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
@@ -68,8 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_032939) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "campaign_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "campaign_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status"

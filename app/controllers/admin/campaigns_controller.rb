@@ -48,8 +48,6 @@ class Admin::CampaignsController < ApplicationController
     campaign = Campaign.find(params[:id])
     campaign.update(approved: 2)
 
-
-
     render json: { status: 'success', message: 'Campaign rejected .' }
   rescue ActiveRecord::RecordNotFound
     render json: { status: 'error', message: 'Campaign not found.' }, status: 404
